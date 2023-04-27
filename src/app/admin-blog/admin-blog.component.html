@@ -1,0 +1,52 @@
+<div class="container-fluid d-flex">
+    <div class="col-2 title-blog">
+        <div class="ps-3 py-2 bg-dark text-white-50 rounded-1">Blogs</div>
+    </div>
+    <div class="col-10 ps-4">
+        <form>
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="title here.." [(ngModel)]="newTitle" name="newTitle">
+            </div>
+            <div class="mb-3">
+                <textarea class="form-control" rows="5" placeholder="text here.." [(ngModel)]="newText" name="newText"></textarea>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="author here.." [(ngModel)]="newAuthor" name="newAuthor">
+            </div>
+            <button type="submit" class="btn btn-dark add-click" 
+            (click)="addPost()" *ngIf="!editStatus"
+            [disabled]="!newTitle || !newText || !newAuthor">
+            Add</button>
+            <button type="submit" class="btn btn-light" 
+            (click)="savePost()" *ngIf="editStatus"
+            [disabled]="!newTitle || !newText || !newAuthor"
+            >Save edit</button>
+        </form>
+        <table class="table mt-3">
+            <thead class="border-top">
+                <tr>
+                    <th scope="col" class="col-1">#</th>
+                    <th scope="col" class="col-2">Title</th>
+                    <th scope="col" class="col-3 title-blog">Text</th>
+                    <th scope="col" class="col-2 title-blog">Author</th>
+                    <th scope="col" class="col-2">Edit</th>
+                    <th scope="col" class="col-2">Delete</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <tr *ngFor="let post of adminBlog; index as i">
+                    <th scope="row"> {{ i+1 }} </th>
+                    <td> {{ post.title }} </td>
+                    <td class="title-blog"> {{ post.text | slice:0:25 }} <span *ngIf="post.text.length > 25">...</span></td>
+                    <td class="title-blog"> {{ post.author }} </td>
+                    <td>
+                        <button type="submit" class="btn btn-dark add-click" (click)="editPost(post)">Edit</button>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-dark add-click" (click)="deletePost(post)" [disabled]="editStatus">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="row row-cols-1 row-cols-md-3 g-4 px-3">
+    <div class="col" *ngFor="let post of userBlog">
+        <div class="card border-0 rounded-0">
+            <img src="https://www.jimdo.com/static/7f58e83e14a16db25da8e56995f710b8/b086f/hero.jpg" class="card-img-top rounded-0" alt="...">
+            <div class="card-body px-0">
+                <p class="card-text text-primary"> {{ post.author | uppercase }} </p>
+                <h5 class="card-title"> {{ post.title }} </h5>
+                <p class="card-text" style="text-align: justify;"> {{ post.text }} </p>
+            </div>
+        </div>
+    </div>
+</div>
